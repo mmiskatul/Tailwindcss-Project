@@ -14,7 +14,7 @@
         <!-- Logo & Brand Name -->
         <a href="#" id="brand" class="flex items-center gap-2">
             <img src="./image/asset 0.png" alt="Logo" class="w-10 h-10 object-cover">
-            <span class="text-lg font-semibold font-sans">ToDesktop</span>
+            <span class="text-lg display font-semibold font-sans">ToDesktop</span>
         </a>
 
         <!-- Desktop Menu -->
@@ -28,7 +28,7 @@
         </div>
         <button class="hidden md:flex items-center gap-2 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 transition-all">
             <i class="fas fa-desktop"></i>
-            <span>Electron Developer</span>
+            <span class="display">Electron Developer</span>
             <i class="fas fa-arrow-right"></i>
         </button>
 
@@ -43,7 +43,7 @@
             <div class="flex justify-between items-center mb-8">
                 <a href="#" class="flex items-center gap-2">
                     <img src="./image/asset 0.png" alt="Logo" class="w-10 h-10 object-cover">
-                    <span class="text-lg font-semibold">ToDesktop</span>
+                    <span class="text-lg display font-semibold">ToDesktop</span>
                 </a>
                 <button id="close-menu-button" class="p-2 text-gray-600">
                     <i class="fas fa-times text-xl"></i>
@@ -62,7 +62,7 @@
                 <div class="h-[1px] bg-gray-300"></div>
                 <button class="flex items-center gap-2 border border-gray-300 px-4 py-4 rounded-lg hover:bg-gray-200 w-full mt-4">
                     <i class="fas fa-desktop"></i>
-                    <span>Electron Developer</span>
+                    <span class="display">Electron Developer</span>
                     <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
@@ -70,10 +70,22 @@
     </nav>
     <!-- Main -->
 
-        <main>
+    <main>
             <!-- Hero Selection -->
-             
-        </main>
+            <div id="hero" class="min-h-screen bg-gradient-to-br from-purple-50 via-orange-50 to-transparent">
+                <div id="hero-container" class="max-w-4xl mx-auto px-6 pb-32 flex flex-col">
+                    <div id="version-text" class="flex items-center  my-6 px-3 py-1 gap-2 border border-yellow-300
+                     bg-yellow-50 rounded-lg w-fit shadow-md hover:shadow-lg hover:-translate-y-1 transition group ">
+                        <div class="w-2 h-2 bg-yellow-400 rounded-full border border-yellow-600 "></div>
+                        <p class="display font-medium text-yellow-600">v0.21.1: <span class="text-yellow-800">Find-in-page bug fixes</span> </p>
+                        <i class="fas fa-arrow-right text-yellow-600 group-hover:translate-x-1 transition duration-300"></i>
+                    </div>
+                    
+                </div>
+
+            </div>
+
+    </main>
 
     
    
