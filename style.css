@@ -11,3 +11,26 @@ h1,h2,h3,p{
     font-family: 'poppins',sans-serif;
     
 }
+.company-card {
+    @apply flex flex-col min-w-24 min-h-24 p-2 items-center justify-center bg-white rounded-xl border border-gray-300 shadow;
+  }
+  .company-card img {
+    @apply w-12 h-12 md:w-16 md:h-16;
+  }
+  .company-card span {
+    @apply text-xs md:text-sm font-semibold;
+  }
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+  @keyframes scrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-scroll-left {
+    animation: scrollLeft 30s linear infinite;
+  }

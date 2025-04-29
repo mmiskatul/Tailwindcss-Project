@@ -1,67 +1,59 @@
-const mobileMenu = document.getElementById('mobile-menu');
-const mobileMenuButton = document.getElementById('mobile-menu-button');
-const closeMenuButton = document.getElementById('close-menu-button');
+const navDialog = document.getElementById('nav-dialog');
+function handleMenu() {
+    navDialog.classList.toggle('hidden');
+}
 
+const initialTranslateLTR = -48*4;
+const initialTranslateRTL = 36*4;
 
-mobileMenuButton.addEventListener('click', () => {
-    mobileMenu.classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; 
-});
-
-closeMenuButton.addEventListener('click', () => {
-    mobileMenu.classList.add('hidden');
-    document.body.style.overflow = 'auto'; 
-});
-
-mobileMenu.addEventListener('click', (e) => {
-    if (e.target === mobileMenu) {
-        mobileMenu.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
-});
-
-let lastScrollPosition = window.scrollY;
-let scrollDirection = 'down'; // 'up' or 'down'
-
-// Track scroll direction
-window.addEventListener('scroll', () => {
-    const currentScrollPosition = window.scrollY;
-    scrollDirection = currentScrollPosition > lastScrollPosition ? 'down' : 'up';
-    lastScrollPosition = currentScrollPosition;
-});
-
-function setUpIntersectionObserver(element, isLToR, speed) {
-
-    element.style.opacity = '0';
-    element.style.transform = isLToR ? 'translateX(-100px)' : 'translateX(100px)';
-    element.style.transition = `all ${speed}s ease-out`;
-
+function setupIntersectionObserver(element, isLTR, speed) {
     const intersectionCallback = (entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (scrollDirection === 'down') {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateX(0)';
-                } else {
-
-                    element.style.opacity = '0';
-                    element.style.transform = isLToR ? 'translateX(-100px)' : 'translateX(100px)';
-                }
-            }
-        });
-    };
-
-    const intersectionObserver = new IntersectionObserver(intersectionCallback, {
-        threshold: 0.1
-    });
+        const isIntersecting = entries[0].isIntersecting;
+        if(isIntersecting) {
+            document.addEventListener('scroll', scrollHandler);
+        } else {
+            document.removeEventListener('scroll', scrollHandler);
+        }
+    }
+    const intersectionObserver = new IntersectionObserver(intersectionCallback);
 
     intersectionObserver.observe(element);
+
+    function scrollHandler() {
+        const translateX = (window.innerHeight - element.getBoundingClientRect().top) * speed;
+
+        let totalTranslate = 0;
+        if(isLTR) {
+            totalTranslate = translateX + initialTranslateLTR;
+        } else {
+            totalTranslate = -(translateX + initialTranslateRTL);
+        }
+
+        element.style.transform = `translateX(${totalTranslate}px)`;
+    }
+
 }
 
 const line1 = document.getElementById('line1');
 const line2 = document.getElementById('line2');
 const line3 = document.getElementById('line3');
+const line4 = document.getElementById('line4');
 
-setUpIntersectionObserver(line1, true, 0.5);   
-setUpIntersectionObserver(line2, false, 0.5); 
-setUpIntersectionObserver(line3, true, 0.5);  
+
+setupIntersectionObserver(line1, true, 0.15);
+setupIntersectionObserver(line2, false, 0.15);
+setupIntersectionObserver(line3, true, 0.15);
+
+setupIntersectionObserver(line4, true, 0.8);
+
+const dtElements = document.querySelectorAll('dt');
+dtElements.forEach(element => {
+    element.addEventListener('click', () => {
+        const ddId = element.getAttribute('aria-controls');
+        const ddElement = document.getElementById(ddId);
+        const ddArrowIcon = element.querySelectorAll('i')[0];
+
+        ddElement.classList.toggle('hidden');
+        ddArrowIcon.classList.toggle('-rotate-180');
+    })
+})
