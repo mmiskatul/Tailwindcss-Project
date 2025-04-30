@@ -34,3 +34,6 @@ h1,h2,h3,p{
   .animate-scroll-left {
     animation: scrollLeft 30s linear infinite;
   }
+  body,html{
+    overflow-x: hidden;
+  }
